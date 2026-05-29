@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Balonmano Interactivo</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+margin:0;
+background:#fff8ee;
+font-family:'Nunito',sans-serif;
+overflow-x:hidden;
+}
+
+h1,h2,h3{
+font-family:'Baloo 2',cursive;
+}
+
+.hero{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:30px;
+background:#FFD60A;
+}
+
+.hero h1{
+font-size:4rem;
+color:#1B74E4;
+}
+
+.hero p{
+font-size:1.3rem;
+max-width:700px;
+}
+
+.mascota{
+font-size:120px;
+animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-20px);}
+}
+
+.section{
+padding:80px 20px;
+}
+
+.hover-underline{
+font-size:2.2rem;
+display:inline-block;
+position:relative;
+color:#1B74E4;
+margin-bottom:40px;
+}
+
+.hover-underline::after,
+.hover-underline::before{
+content:'';
+position:absolute;
+width:100%;
+height:3px;
+background:linear-gradient(to right,#FF6B35,#1B74E4);
+left:0;
+transform:scaleX(0);
+transition:.4s;
+}
+
+.hover-underline::after{
+bottom:-8px;
+transform-origin:right;
+}
+
+.hover-underline::before{
+top:-8px;
+transform-origin:left;
+}
+
+.hover-underline:hover::after,
+.hover-underline:hover::before{
+transform:scaleX(1);
+}
+
+.holographic-card{
+background:#1B74E4;
+border-radius:25px;
+padding:30px;
+color:white;
+position:relative;
+overflow:hidden;
+transition:.5s;
+height:100%;
+}
+
+.holographic-card::before{
+content:'';
+position:absolute;
+top:-50%;
+left:-50%;
+width:200%;
+height:200%;
+background:linear-gradient(
+0deg,
+transparent,
+transparent 30%,
+rgba(255,255,255,.3)
+);
+transform:rotate(-45deg);
+opacity:0;
+transition:.5s;
+}
+
+.holographic-card:hover{
+transform:scale(1.05);
+box-shadow:0 0 30px rgba(27,116,228,.5);
+}
+
+.holographic-card:hover::before{
+opacity:1;
+transform:rotate(-45deg) translateY(100%);
+}
+
+.particle{
+background:#FF6B35;
+padding:40px;
+border-radius:25px;
+text-align:center;
+position:relative;
+overflow:hidden;
+transition:.5s;
+}
+
+.particle h2{
+transition:.5s;
+color:white;
+}
+
+.particle::before,
+.particle::after{
+content:'';
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:repeating-radial-gradient(
+circle at center,
+white 1px,
+transparent 2px,
+transparent 40px
+);
+opacity:0;
+transition:.5s;
+}
+
+.particle:hover h2{
+transform:scale(1.4) rotate(360deg);
+opacity:0;
+}
+
+.particle:hover::before{
+transform:scale(2) rotate(45deg);
+opacity:.3;
+}
+
+.particle:hover::after{
+transform:scale(2) rotate(-45deg);
+opacity:.3;
+}
+
+.dropdown{
+position:relative;
+display:inline-block;
+}
+
+.dropdown button{
+background:#2ECC71;
+border:none;
+padding:15px 30px;
+border-radius:20px;
+color:white;
+font-weight:bold;
+}
+
+.dropdown-content{
+position:absolute;
+background:white;
+min-width:200px;
+box-shadow:0 5px 20px rgba(0,0,0,.1);
+border-radius:15px;
+opacity:0;
+transform:translateY(-10px);
+transition:.3s;
+pointer-events:none;
+}
+
+.dropdown:hover .dropdown-content{
+opacity:1;
+transform:translateY(0);
+pointer-events:auto;
+}
+
+.dropdown-content a{
+display:block;
+padding:15px;
+text-decoration:none;
+color:#333;
+}
+
+.dropdown-content a:hover{
+background:#f1f1f1;
+}
+
+.quiz{
+background:white;
+padding:40px;
+border-radius:30px;
+box-shadow:0 10px 25px rgba(0,0,0,.1);
+}
+
+.quiz button{
+width:100%;
+padding:15px;
+margin:10px 0;
+border:none;
+border-radius:15px;
+background:#1B74E4;
+color:white;
+font-weight:bold;
+transition:.3s;
+}
+
+.quiz button:hover{
+transform:translateY(-3px);
+}
+
+.correct{
+background:#2ECC71 !important;
+}
+
+.wrong{
+background:#E74C3C !important;
+}
+
+footer{
+background:#1B74E4;
+color:white;
+padding:40px;
+text-align:center;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:2.5rem;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+
+<div class="mascota">🦁</div>
+
+<h1>¡Balonmano Divertido!</h1>
+
+<p>Aprende las reglas y conviértete en un gran jugador.</p>
+
+</section>
+
+<section class="section container text-center">
+
+<h2 class="hover-underline">Datos rápidos</h2>
+
+<div class="row g-4">
+
+<div class="col-md-4">
+<div class="holographic-card">
+<h3>👥 Equipo</h3>
+<p>7 jugadores participan por equipo.</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="holographic-card">
+<h3>🥅 Objetivo</h3>
+<p>Marcar más goles que el rival.</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="holographic-card">
+<h3>⏱ Tiempo</h3>
+<p>Dos tiempos de 30 minutos.</p>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<section class="section container">
+
+<div class="particle">
+<h2>¡PASA EL CURSOR!</h2>
+</div>
+
+</section>
+
+<section class="section container text-center">
+
+<h2 class="mb-5">Explora</h2>
+
+<div class="dropdown">
+
+<button>Reglas básicas</button>
+
+<div class="dropdown-content">
+<a href="#">Máximo 3 pasos</a>
+<a href="#">No entrar al área</a>
+<a href="#">Usar manos</a>
+</div>
+
+</div>
+
+</section>
+
+<section class="section container">
+
+<div class="quiz">
+
+<h2 class="text-center">Mini Quiz</h2>
+
+<p id="question">¿Cuántos jugadores tiene un equipo?</p>
+
+<button onclick="check(this,true)">7 jugadores</button>
+<button onclick="check(this,false)">11 jugadores</button>
+<button onclick="check(this,false)">5 jugadores</button>
+
+<p id="result" class="mt-3 fw-bold"></p>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>Creado por: <strong>Luana Fuentes</strong></p>
+
+<p>Proyecto interactivo de Balonmano</p>
+
+</footer>
+
+<script>
+
+function check(btn,correct){
+
+document.querySelectorAll(".quiz button").forEach(b=>{
+b.disabled=true;
+});
+
+let result=document.getElementById("result");
+
+if(correct){
+btn.classList.add("correct");
+result.innerHTML="✅ Correcto";
+}else{
+btn.classList.add("wrong");
+result.innerHTML="❌ Incorrecto";
+}
+
+}
+
+</script>
+
+</body>
+</html>
